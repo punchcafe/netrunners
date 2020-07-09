@@ -21,4 +21,8 @@ class CardTile {
         }
         this.card = card;
     }
+
+    Card getCard(){
+        return this.card;
+    }
 }
