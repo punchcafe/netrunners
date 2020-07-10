@@ -1,0 +1,14 @@
+set:
+  - card-name: lol
+  type: system
+  description: lololol
+  implementation:
+    type: method
+    name: annontated funtional interfasce provider
+
+  - card-name: lol
+  type: system
+  description: lololol
+  implementation:
+    type: class
+    name: dev.punchcafe.netrunners.SomeCardImp

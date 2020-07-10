@@ -6,6 +6,6 @@ import dev.punchcafe.netrunners.game.Turn;
 public class DrawPhase implements TurnPhase {
     @Override
     public void execute(Turn turn, Game game) {
-        turn.currentPlayer().draw();
+        turn.currentPlayer().draw(turn.currentPlayer().calculateResourceScore(game.getField()));
     }
 }

@@ -8,9 +8,11 @@ public class PlayPhase implements TurnPhase {
     @Override
     public void execute(Turn turn, Game game) {
         for(Card card : turn.currentPlayer().getHand().cards){
+            //TODO: remove for renderer
             turn.currentPlayer().sendToPlayerOutput("a card");
         }
         int choice = Integer.parseInt(turn.currentPlayer().getPlayerInput("pick a card"));
-        turn.currentPlayer().getHand().cards.get(choice).playCard(game);
+        //TODO: move method from hand to player
+        turn.currentPlayer().getHand().playCardFromHand(choice, game);
     }
 }

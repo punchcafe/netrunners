@@ -1,15 +1,27 @@
 package dev.punchcafe.netrunners.player;
 
 import dev.punchcafe.netrunners.deck.Deck;
+import dev.punchcafe.netrunners.field.Field;
 
 import java.util.Scanner;
 
 public class Player {
+    //TODO: make generic with Net runners specific class
+
     String displayName;
     Hand hand;
-    OriginNode originNode;
     PlayerInputStream inputStream;
     Deck deck;
+
+    /**
+     * Calculates the resource score for a player, based on how deep into the other side of the field their
+     * network penetrates. This score corresponds to the number of cards a player may draw per turn.
+     * @param field
+     * @return
+     */
+    public int calculateResourceScore(Field field){
+        return 1;
+    }
 
     public Player(){
         Scanner scanner = new Scanner(System.in);

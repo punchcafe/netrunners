@@ -16,6 +16,10 @@ public class FieldRow {
         return tiles.length;
     }
 
+    public CardTile getCardTile(int index){
+        return tiles[index];
+    }
+
     public Card getCard(int index){
         if(index >= tiles.length){
             throw new RuntimeException();

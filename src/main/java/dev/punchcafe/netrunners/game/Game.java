@@ -34,6 +34,13 @@ public class Game {
         return player2;
     }
 
+    public void setupGame(){
+        //TODO: place origin nodes;
+        //TODO: Load deck from config files
+        //TODO: Load Player hands
+
+    }
+
     // Returns winner
     public Player gameLoop(){
         while(this.determineWinner(gameField) == null) {
