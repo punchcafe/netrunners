@@ -1,5 +1,6 @@
 package dev.punchcafe.netrunners.player;
 
+import dev.punchcafe.netrunners.card.OriginNode;
 import dev.punchcafe.netrunners.deck.Deck;
 import dev.punchcafe.netrunners.field.Field;
 
@@ -12,6 +13,7 @@ public class Player {
     Hand hand;
     PlayerInputStream inputStream;
     Deck deck;
+    OriginNode originNode;
 
     /**
      * Calculates the resource score for a player, based on how deep into the other side of the field their
@@ -48,6 +50,14 @@ public class Player {
         for (int i = 0; i < times; i++) {
             hand.cards.add(this.deck.draw());
         }
+    }
+
+    public void setOriginNode(OriginNode originNode){
+        this.originNode = originNode;
+    }
+
+    public OriginNode getOriginNode(){
+        return this.originNode;
     }
 
     public Hand getHand() {

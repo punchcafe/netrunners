@@ -1,5 +1,6 @@
 package dev.punchcafe.netrunners.game;
 
+import dev.punchcafe.netrunners.card.OriginNode;
 import dev.punchcafe.netrunners.field.Field;
 import dev.punchcafe.netrunners.field.FieldRow;
 import dev.punchcafe.netrunners.game.phase.DrawPhase;
@@ -38,7 +39,10 @@ public class Game {
         //TODO: place origin nodes;
         //TODO: Load deck from config files
         //TODO: Load Player hands
-
+        player1.setOriginNode(new OriginNode(player1, 0, 0));
+        player2.setOriginNode(new OriginNode(player2, 8, 0));
+        player1.getOriginNode().playCard(this);
+        player2.getOriginNode().playCard(this);
     }
 
     // Returns winner

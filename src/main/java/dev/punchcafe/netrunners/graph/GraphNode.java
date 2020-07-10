@@ -16,7 +16,7 @@ public interface GraphNode<T> {
 
     FieldPosition<T> getFieldPosition();
 
-    List<Edge> getEdges();
+    List<Edge<T>> getEdges();
 
-    Edge getEdge(EdgeValue value);
+    Edge<T> getEdge(EdgeValue value);
 }

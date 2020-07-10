@@ -11,6 +11,8 @@ public class App {
     }
 
     public static void main(String[] args) {
-        new Game().gameLoop();
+        final Game game = new Game();
+        game.setupGame();
+        game.gameLoop();
     }
 }

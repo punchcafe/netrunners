@@ -11,10 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class CardTile implements GraphNode<CardTile> {
-
-    //TODO: consider removing
-    private static List<Class<? extends Card>> LEGAL_CLASSES = List.of(SystemCard.class, GenericSystemCard.class);
+public class CardTile implements GraphNode<CardTile> {
 
     private Map<EdgeValue, Edge<CardTile>> edges = new HashMap<>();
 
@@ -27,9 +24,6 @@ class CardTile implements GraphNode<CardTile> {
     }
 
     void setCard(Card card){
-        if(!LEGAL_CLASSES.contains(card.getClass())){
-            throw new RuntimeException();
-        }
         this.card = card;
     }
 
@@ -38,7 +32,7 @@ class CardTile implements GraphNode<CardTile> {
         card = null;
     }
 
-    Card getCard(){
+    public Card getCard(){
         return this.card;
     }
 
@@ -48,8 +42,8 @@ class CardTile implements GraphNode<CardTile> {
     }
 
     @Override
-    public List<Edge> getEdges() {
-        return null;
+    public List<Edge<CardTile>> getEdges() {
+        return List.copyOf(edges.values());
     }
 
     @Override
