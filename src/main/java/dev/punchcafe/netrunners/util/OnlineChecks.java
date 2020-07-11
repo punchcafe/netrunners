@@ -2,10 +2,10 @@ package dev.punchcafe.netrunners.util;
 
 import dev.punchcafe.netrunners.card.Card;
 import dev.punchcafe.netrunners.card.OriginNode;
-import dev.punchcafe.netrunners.field.CardTile;
-import dev.punchcafe.netrunners.field.Field;
 import dev.punchcafe.netrunners.field.FieldPosition;
-import dev.punchcafe.netrunners.graph.Edge;
+import dev.punchcafe.netrunners.field.Tile;
+import dev.punchcafe.netrunners.game.GameField;
+import dev.punchcafe.netrunners.field.graph.Edge;
 import dev.punchcafe.netrunners.player.Player;
 
 import java.util.ArrayList;
@@ -18,35 +18,27 @@ public class OnlineChecks {
         return true;
     }
 
-    public static List<FieldPosition> allOnlineNodesFromOrigin(OriginNode node, Field field) {
+    public static List<FieldPosition<Card>> allOnlineNodesFromOrigin(OriginNode node, GameField field) {
         final List<FieldPosition<Card>> nodes = new ArrayList<>();
-        final CardTile nodeTile = getTileForCard(node, field);
+        FieldPosition<?> fieldPositionOfNode = field.getPositionOf(node);
+        final Tile<Card> nodeTile = field.getTile(fieldPositionOfNode.getRow(), fieldPositionOfNode.getIndex());
         return recursiveFunction(nodeTile, new ArrayList<>(), node.getOwner())
                 .stream()
-                .map(CardTile::getFieldPosition).collect(Collectors.toList());
+                .map(tile ->
+                    FieldPosition.convertFieldPosition(field.getPositionOfTile(tile), tile.getContents())
+                ).collect(Collectors.toList());
     }
 
-    public static List<CardTile> recursiveFunction(CardTile tile, List<CardTile> path, Player owner) {
-        if (path.contains(tile) || tile.getCard() == null || tile.getCard().getOwner() != owner) {
+    public static List<Tile<Card>> recursiveFunction(Tile<Card> tile, List<Tile> path, Player owner) {
+        if (path.contains(tile) || tile.getContents() == null || tile.getContents().getOwner() != owner) {
             return List.of();
         }
         path.add(tile);
-        final List<CardTile> result = new ArrayList<>();
+        final List<Tile<Card>> result = new ArrayList<>();
         result.add(tile);
-        for (Edge<CardTile> edge : tile.getEdges()) {
+        for (Edge<Tile> edge : tile.getEdges()) {
             result.addAll(recursiveFunction(edge.getOther(tile), path, owner));
         }
         return result;
-    }
-
-    public static CardTile getTileForCard(Card card, Field field) {
-        for (int i = 0; i < field.numberOfRows(); i++) {
-            for (int j = 0; i < field.getFieldRow(i).size(); i++) {
-                if (card == field.getFieldRow(i).getCard(j)) {
-                    return field.getFieldRow(i).getCardTile(j);
-                }
-            }
-        }
-        return null;
     }
 }

@@ -1,6 +1,6 @@
 package dev.punchcafe.netrunners.card;
 
-import dev.punchcafe.netrunners.field.Field;
+import dev.punchcafe.netrunners.game.GameField;
 import dev.punchcafe.netrunners.game.Game;
 
 import java.util.regex.Matcher;
@@ -23,7 +23,7 @@ public abstract class SystemCard extends Card {
         int playerRowChoice = Integer.parseInt(matcher.group(1));
         int playerIndexChoice = Integer.parseInt(matcher.group(2));
         if(isLegalMove(game.getField(), playerRowChoice, playerIndexChoice)){
-            game.getField().layCard(this, playerRowChoice, playerIndexChoice);
+            game.getField().setContents(this, playerRowChoice, playerIndexChoice);
         } else {
             //TODO: replace with validation violation messages
             throw new RuntimeException("Illegal Move");
@@ -31,7 +31,7 @@ public abstract class SystemCard extends Card {
         playCardImp(game);
     }
 //TODO: make abstract, make implementation abstract class which playCard uses
-    public boolean isLegalMove(Field field, int row, int index){
+    public boolean isLegalMove(GameField field, int row, int index){
         return true;
     };
 

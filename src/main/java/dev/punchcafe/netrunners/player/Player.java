@@ -2,7 +2,7 @@ package dev.punchcafe.netrunners.player;
 
 import dev.punchcafe.netrunners.card.OriginNode;
 import dev.punchcafe.netrunners.deck.Deck;
-import dev.punchcafe.netrunners.field.Field;
+import dev.punchcafe.netrunners.game.GameField;
 
 import java.util.Scanner;
 
@@ -21,7 +21,7 @@ public class Player {
      * @param field
      * @return
      */
-    public int calculateResourceScore(Field field){
+    public int calculateResourceScore(GameField field){
         return 1;
     }
 

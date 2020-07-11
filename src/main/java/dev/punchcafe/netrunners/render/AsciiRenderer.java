@@ -1,12 +1,12 @@
 package dev.punchcafe.netrunners.render;
 
 import dev.punchcafe.netrunners.card.Card;
-import dev.punchcafe.netrunners.field.FieldRow;
 import dev.punchcafe.netrunners.game.Game;
 import dev.punchcafe.netrunners.player.Player;
 import dev.punchcafe.netrunners.util.OnlineChecks;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public class AsciiRenderer implements Renderer {
@@ -34,7 +34,7 @@ public class AsciiRenderer implements Renderer {
         playerIdentifierMap = Map.of(game.getPlayer1(), PlayerIdentifier.ONE, game.getPlayer2(), PlayerIdentifier.TWO);
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < game.getField().numberOfRows(); i++) {
-            output.append(renderRow(game.getField().getFieldRow(i)));
+            output.append(renderRow(game.getField().getRow(i)));
         }
         System.out.println(output.toString());
         System.out.println(String.format("Online nodes: %d",
@@ -87,7 +87,7 @@ public class AsciiRenderer implements Renderer {
         throw new RuntimeException();
     }
 
-    public String renderRow(FieldRow row) {
+    public String renderRow(List<Card> row) {
         final int widthOfRow = row.size() * CARD_WIDTH;
         final int displacement = (TOTAL_WIDTH - widthOfRow) / 2;
         System.out.println(String.format("width: %d", widthOfRow));
@@ -104,10 +104,10 @@ public class AsciiRenderer implements Renderer {
         // Cards
         for (int i = 0; i < row.size(); i++) {
             PlayerIdentifier identifier;
-            if (row.getCard(i) == null) {
+            if (row.get(i) == null) {
                 identifier = null;
             } else {
-                identifier = playerIdentifierMap.get(row.getCard(i).getOwner());
+                identifier = playerIdentifierMap.get(row.get(i).getOwner());
             }
             String[] cardRender = singleCardRowSegments(identifier);
             System.out.println("you're logging cards");

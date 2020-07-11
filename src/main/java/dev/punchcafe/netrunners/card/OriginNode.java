@@ -16,7 +16,7 @@ public class OriginNode extends Card {
 
     @Override
     public void playCard(Game game) {
-        game.getField().layCard(this, row, index);
+        game.getField().setContents(this, row, index);
         //can only be played once at the beginning of the game automatically by each player
     }
 }

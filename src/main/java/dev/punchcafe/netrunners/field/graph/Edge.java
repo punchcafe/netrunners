@@ -1,8 +1,9 @@
-package dev.punchcafe.netrunners.graph;
-
-import dev.punchcafe.netrunners.card.Card;
+package dev.punchcafe.netrunners.field.graph;
 
 public class Edge<T> {
+
+    private T node1;
+    private T node2;
 
     public Edge(T node1, T node2){
         this.node1 = node1;
@@ -15,12 +16,7 @@ public class Edge<T> {
         } else if(subject == this.node2){
             return this.node1;
         } else {
-            System.out.println("warning!");
-            System.out.println(this);
             return null;
         }
     }
-
-    T node1;
-    T node2;
 }

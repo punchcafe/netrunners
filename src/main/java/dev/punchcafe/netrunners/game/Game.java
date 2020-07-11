@@ -1,8 +1,6 @@
 package dev.punchcafe.netrunners.game;
 
 import dev.punchcafe.netrunners.card.OriginNode;
-import dev.punchcafe.netrunners.field.Field;
-import dev.punchcafe.netrunners.field.FieldRow;
 import dev.punchcafe.netrunners.game.phase.DrawPhase;
 import dev.punchcafe.netrunners.game.phase.PlayPhase;
 import dev.punchcafe.netrunners.game.phase.TurnPhase;
@@ -14,13 +12,13 @@ import java.util.List;
 
 public class Game {
     private Renderer renderer;
-    private Field gameField;
+    private GameField gameField;
     private Turn turn;
     private Player player1;
     private Player player2;
 
     public Game(){
-        this.gameField = new Field();
+        this.gameField = new GameField();
         this.turn = new Turn(List.of(new DrawPhase(), new PlayPhase()));
         player1 = new Player();
         player2 = new Player();
@@ -36,10 +34,10 @@ public class Game {
     }
 
     public void setupGame(){
-        //TODO: place origin nodes;
         //TODO: Load deck from config files
         //TODO: Load Player hands
         player1.setOriginNode(new OriginNode(player1, 0, 0));
+        //TODO: look at decoupling dependencies here
         player2.setOriginNode(new OriginNode(player2, 8, 0));
         player1.getOriginNode().playCard(this);
         player2.getOriginNode().playCard(this);
@@ -66,11 +64,11 @@ public class Game {
         return this.determineWinner(gameField);
     }
 
-    public Field getField(){
+    public GameField getField(){
         return this.gameField;
     }
 
-    private Player determineWinner(Field gameField){
+    private Player determineWinner(GameField gameField){
         // null means no winner
         return null;
     }

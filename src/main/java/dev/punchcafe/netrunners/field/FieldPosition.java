@@ -1,14 +1,17 @@
 package dev.punchcafe.netrunners.field;
 
-import dev.punchcafe.netrunners.card.Card;
-
 public class FieldPosition<T> {
-    T card;
+
+    public static <T, C> FieldPosition<C> convertFieldPosition(FieldPosition<T> originalPosition, C newContent){
+        return new FieldPosition<>(newContent, originalPosition.getRow(), originalPosition.getIndex());
+    }
+
+    T content;
     int row;
     int index;
 
-    public FieldPosition(T card, int row, int index){
-        this.card = card;
+    public FieldPosition(T content, int row, int index){
+        this.content = content;
         this.row = row;
         this.index = index;
     }
@@ -21,7 +24,7 @@ public class FieldPosition<T> {
         return this.index;
     }
 
-    public T getCard(){
-        return this.card;
+    public T getContent(){
+        return this.content;
     }
 }

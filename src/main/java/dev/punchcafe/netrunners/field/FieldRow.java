@@ -1,14 +1,17 @@
 package dev.punchcafe.netrunners.field;
 
-import dev.punchcafe.netrunners.card.Card;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class FieldRow {
-    private final CardTile[] tiles;
+public class FieldRow<T> {
+    private final Tile<T>[] tiles;
 
     public FieldRow(int size){
-        tiles = new CardTile[size];
+
+        tiles = new Tile[size];
         for(int i = 0; i < tiles.length; i++){
-            tiles[i] = new CardTile();
+            tiles[i] = new Tile();
         }
     }
 
@@ -16,21 +19,22 @@ public class FieldRow {
         return tiles.length;
     }
 
-    public CardTile getCardTile(int index){
+    public Tile<T> getTile(int index){
         return tiles[index];
     }
 
-    public Card getCard(int index){
-        if(index >= tiles.length){
-            throw new RuntimeException();
-        }
-        return tiles[index].getCard();
+    public List<T> getContentsOfRow(){
+        return Arrays.stream(tiles).map(Tile::getContents).collect(Collectors.toList());
     }
 
-    public void setCard(Card card, int index){
+    public T getContentsOfTile(int index) {
+        return tiles[index].getContents();
+    }
+
+    public void setInTile(T obj, int index){
         if(index >= tiles.length){
             throw new RuntimeException();
         }
-        tiles[index].setCard(card);
+        tiles[index].setContents(obj);
     }
 }
