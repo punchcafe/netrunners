@@ -32,6 +32,7 @@ public class Player {
         this.deck = new Deck(this);
     }
 
+    //TODO: consider making this a specific input class, which is adapted
     public String getPlayerInput(String prompt) {
         System.out.println(prompt);
         return inputStream.getPlayerInput();
