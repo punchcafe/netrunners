@@ -38,7 +38,7 @@ public class AsciiRenderer implements Renderer {
         }
         System.out.println(output.toString());
         System.out.println(String.format("Online nodes: %d",
-                OnlineChecks.allOnlineNodesFromOrigin(
+                OnlineChecks.allOnlineNodePositionsFromOrigin(
                         game.getPlayer1().getOriginNode(),
                         game.getField()).size()
         ));

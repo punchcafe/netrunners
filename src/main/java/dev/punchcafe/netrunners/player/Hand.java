@@ -11,6 +11,8 @@ public class Hand {
 
     public void playCardFromHand(int cardNumber, Game game){
         //TODO: handle error
-        cards.get(cardNumber).playCard(game);
+        final Card card = cards.get(cardNumber);
+        cards.remove(card);
+        card.playCard(game);
     }
 }

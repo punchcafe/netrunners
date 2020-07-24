@@ -46,7 +46,7 @@ public class Field<T> {
     public FieldPosition<T> getPositionOf(T obj){
         for(int i = 0; i < rows.length; i++){
             for(int j = 0; j < rows[i].size(); i++){
-                if(obj == rows[i].getTile(i).getContents()){
+                if(obj == rows[i].getTile(j).getContents()){
                     return new FieldPosition<>(obj, i, j);
                 }
             }
